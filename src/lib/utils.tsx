@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 // import { createHash } from "node:crypto";
 import FormData from "form-data";
-// import { sha256, sha224 } from "js-sha256";
+import { sha256, sha224 } from "js-sha256";
 
 import {
   BiDiamond,
@@ -162,8 +162,8 @@ export const toFourDecimals = (num: number) =>
 export const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-// export const hashPassword = (rawPassword: string) =>
-//   sha256(sha256(rawPassword));
+export const hashPassword = (rawPassword: string) =>
+  sha256(sha256(rawPassword));
 
 // export const hashPassword = (rawPassword: string) =>
 //   JSON.stringify(sha256(JSON.stringify(sha256(rawPassword).words)).words);
