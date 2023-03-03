@@ -62,7 +62,7 @@ export default function Page() {
   });
 
   const { error, data, loading, reload } = usePost<Credential, User>({
-    url: "/auth/signin",
+    url: "/auth/signIn",
     onComplete: (user) => {
       if (user) {
         router.reload();

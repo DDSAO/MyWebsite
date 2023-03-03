@@ -62,27 +62,35 @@ export const dateToMonthStr = (date: Date) => {
 
 export const timestampToDateStr = (time?: number | null) => {
   if (!time) return "-";
-  return dateToStr(new Date(time * 1000));
+  let date = new Date(time * 1000);
+  return `${String(date.getFullYear()).padStart(4, "0")}-${String(
+    date.getMonth() + 1
+  ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 };
 
 export const timestampToDateTimeStr = (time?: number | null) => {
   if (!time) return "-";
 
-  const pad = (number: number) => String(number).padStart(2, "0");
-  let theDate = new Date(time * 1000);
-  return `${pad(theDate.getDate())}-${pad(theDate.getMonth() + 1)}-${
-    theDate.getFullYear() % 100
-  } ${pad(theDate.getHours())}:${pad(theDate.getMinutes())}:${pad(
-    theDate.getSeconds()
-  )} `;
+  let date = new Date(time * 1000);
+  return `${String(date.getFullYear()).padStart(4, "0")}-${String(
+    date.getMonth() + 1
+  ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(
+    date.getHours()
+  ).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}:${String(
+    date.getSeconds()
+  ).padStart(2, "0")}`;
 };
-
-export const getCustomerUrl = (url = "") => {
-  if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-    return "http://localhost:5000/customer" + url;
-  } else {
-    return "https://czpofficeapp.com/customer" + url;
+export const timestampToCountUp = (ts: number) => {
+  const format = (val: any) => String(Math.floor(val)).padStart(2, "0");
+  const days = Math.floor(ts / 86400);
+  const hours = (ts % 86400) / 3600;
+  const minutes = (ts % 3600) / 60;
+  const seconds = ts % 60;
+  if (days === 0) {
+    if (hours < 1) return [minutes, seconds].map(format).join(":");
+    return [hours, minutes, seconds].map(format).join(":");
   }
+  return `${days} days - ${[hours, minutes, seconds].map(format).join(":")}`;
 };
 
 export const aboveDiamond = (group: string) => {
@@ -141,40 +149,6 @@ export const getDaysAgo = (days: number, setHours?: string) => {
         numberArr[2]
       )
     );
-  }
-};
-
-export const customerIcon = (level: string, size?: string) => {
-  switch (level) {
-    case "Retailer":
-      return <BiGhost size={size ? size : undefined} color="grey" />;
-    case "Platinum":
-      return <BiUserPlus size={size ? size : undefined} color="#822faf" />;
-    case "Gold":
-      return <BiUser size={size ? size : undefined} color="#ff9b54" />;
-    case "Diamond":
-      return <BiDiamond size={size ? size : undefined} color="#00509d" />;
-    case "Black":
-      return <BiMehBlank size={size ? size : undefined} color="black" />;
-    default:
-      return null;
-  }
-};
-
-export const customerRank = (level: string) => {
-  switch (level) {
-    case "Retailer":
-      return 1;
-    case "Gold":
-      return 2;
-    case "Platinum":
-      return 3;
-    case "Diamond":
-      return 4;
-    case "Black":
-      return 5;
-    default:
-      return 0;
   }
 };
 

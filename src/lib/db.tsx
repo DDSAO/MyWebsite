@@ -4,10 +4,12 @@ import { MongoClient } from "mongodb";
 export const client = new MongoClient("mongodb://localhost:27017");
 
 export const UserCollection = client
-  .db("FrontierUnited")
-  .collection<User>("User");
+  .db("IFindJob")
+  .collection<User>("UserCollection");
 
-export const IndexCollection = client.db("FrontierUnited").collection("Index");
+export const IndexCollection = client
+  .db("IFindJob")
+  .collection("IndexCollection");
 
 export const verifyToken = async (
   token?: string | null
