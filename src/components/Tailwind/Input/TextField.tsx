@@ -74,7 +74,9 @@ export const TextField = (props: {
         bg ?? "bg-transparent"
       }`}
     >
-      {title ? <p className="text-left text-sm">{title}</p> : null}
+      {title ? (
+        <p className="text-left text-xs text-slate-500">{title}</p>
+      ) : null}
       <div className="relative w-full">
         <input
           ref={inputRef}
@@ -83,7 +85,7 @@ export const TextField = (props: {
             if (autoSelect) e.target.select();
           }}
           disabled={disableEdit}
-          className={` ${
+          className={`h-7 ${
             inputValue !== value
               ? "ring-offset-0 ring-2 ring-green-400 border-transparent"
               : "ring-offset-0 ring-1 ring-slate-300 "

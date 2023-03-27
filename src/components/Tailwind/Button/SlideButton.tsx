@@ -12,15 +12,25 @@ import gsap, { Elastic, Power4 } from "gsap";
 export const SlideButton = (props: {
   onClickF: () => void;
   text?: string;
-  // startIcon?: any;
-  // endIcon?: any;
   loading?: boolean;
   disabled?: boolean;
   color?: string;
   selected?: boolean;
   width?: number;
+  startIcon?: any;
+  endIcon?: any;
 }) => {
-  const { onClickF, text, loading, disabled, color, selected, width } = props;
+  const {
+    onClickF,
+    text,
+    loading,
+    disabled,
+    color,
+    selected,
+    width,
+    startIcon,
+    endIcon,
+  } = props;
 
   const upperRef = useRef(null);
   const lowerRef = useRef(null);
@@ -62,6 +72,16 @@ export const SlideButton = (props: {
             selectedColor:
               "border-green-500 hover:border-green-700 bg-green-500 hover:bg-green-700",
           };
+        case "pink":
+          return {
+            textColor: "text-pink-500",
+            selectedTextColor: "text-white",
+
+            borderColor:
+              "border-pink-300 hover:border-pink-500 hover:bg-pink-50",
+            selectedColor:
+              "border-pink-500 hover:border-pink-500 bg-pink-500 hover:bg-pink-700",
+          };
         default:
           return {
             textColor: "text-blue-500",
@@ -100,35 +120,23 @@ export const SlideButton = (props: {
   }, []);
 
   return (
-    <div
-      onClick={() => {
-        !loading && !disabled && onClickF();
-      }}
-      onMouseEnter={() => {
-        if (hoverTimeline.current && !loading && !disabled) {
-          // if (selected) {
-          //   (hoverTimeline.current as any).reverse();
-          // } else {
-          //   (hoverTimeline.current as any).play();
-          // }
-          (hoverTimeline.current as any).play();
-        }
-      }}
-      onMouseLeave={() => {
-        if (hoverTimeline.current && !loading && !disabled)
-          // if (selected) {
-          //   (hoverTimeline.current as any).play();
-          // } else {
-          //   (hoverTimeline.current as any).reverse();
-          // }
-          (hoverTimeline.current as any).reverse();
-      }}
-      className={`flex h-8 ${loading ? "animate-pulse" : ""}`}
-    >
+    <div className={`flex h-8 ${loading ? "animate-pulse" : ""}`}>
       <div
-        style={{
-          width: width ? width : (lowerRef.current as any)?.clientWidth,
+        onClick={() => {
+          !loading && !disabled && onClickF();
         }}
+        onMouseEnter={() => {
+          if (hoverTimeline.current && !loading && !disabled) {
+            (hoverTimeline.current as any).play();
+          }
+        }}
+        onMouseLeave={() => {
+          if (hoverTimeline.current && !loading && !disabled)
+            (hoverTimeline.current as any).reverse();
+        }}
+        // style={{
+        //   width: width ? width : (lowerRef.current as any)?.clientWidth,
+        // }}
         className={`relative flex flex-col flex-start items-center h-8 cursor-pointer rounded-md leading-7 border ${
           loading || disabled
             ? "bg-slate-200"
@@ -142,39 +150,47 @@ export const SlideButton = (props: {
             <AiOutlineLoading className="animate-spin text-slate-500" />
           </div>
         )}
-        <p
+        <div
           ref={upperRef}
-          className={`${
+          className={`select-none  ${
             loading ? "opacity-0" : ""
-          } top-[-100%] leading-8 h-8 absolute cursor-pointer overflow-hidden text-center whitespace-nowrap ${
+          } top-[-100%] flex items-center justify-center gap-2 leading-8 h-8 absolute cursor-pointer overflow-hidden text-center whitespace-nowrap ${
             loading || disabled
               ? "text-slate-400"
               : selected
               ? selectedTextColor
               : textColor
-          }  px-4`}
+          }  ${startIcon ? "pl-2" : "pl-4"} ${endIcon ? "pr-2" : "pr-4"}`}
         >
+          {startIcon}
           {text}
-        </p>
-        <p
+          {endIcon}
+        </div>
+        <div
           ref={lowerRef}
-          className={`${
+          className={`select-none ${
             loading ? "opacity-0" : ""
-          } absolute leading-8 h-8 cursor-pointer overflow-hidden text-center whitespace-nowrap ${
+          } absolute flex items-center justify-center gap-2 leading-8 h-8 cursor-pointer overflow-hidden text-center whitespace-nowrap ${
             loading || disabled
               ? "text-slate-400"
               : selected
               ? selectedTextColor
               : textColor
-          }  px-4`}
+          }  ${startIcon ? "pl-2" : "pl-4"} ${endIcon ? "pr-2" : "pr-4"} `}
         >
+          {startIcon}
           {text}
-        </p>
+          {endIcon}
+        </div>
 
         <p
-          className={`relative h-0 cursor-pointer overflow-hidden text-center whitespace-nowrap text-slate-500 px-4`}
+          className={`select-none relative flex items-center justify-center gap-2 h-0 cursor-pointer overflow-hidden text-center whitespace-nowrap text-slate-500 ${
+            startIcon ? "pl-2" : "pl-4"
+          } ${endIcon ? "pr-2" : "pr-4"}`}
         >
+          {startIcon}
           {text}
+          {endIcon}
         </p>
       </div>
     </div>

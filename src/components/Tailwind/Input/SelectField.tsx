@@ -43,7 +43,9 @@ export const SelectField = (props: {
         }}
         className="flex flex-col overflow-hidden"
       >
-        {title ? <p className="text-sm text-left">{title}</p> : null}
+        {title ? (
+          <p className="text-left text-xs text-slate-500">{title}</p>
+        ) : null}
 
         <div
           className={`bg-white flex items-center justify-flex rounded-md border h-8 w-full hover:border-2 overflow-hidden ${

@@ -74,8 +74,8 @@ export default function Page() {
     <div className="w-screen h-screen flex items-center justify-center">
       <div className="relative w-[450px] h-96">
         <div className="absolute h-96 p-8 rounded-xl shadow-xl border bg-white z-10 duration-300">
-          <div className="w-96 flex items-center justify-end">
-            {/* <Image width={100} height={30} src="/images/logo.png" alt="" /> */}
+          <div className="w-96 flex items-center justify-end mb-8">
+            <Image width={150} height={40} src="/images/logo.png" alt="" />
           </div>
           <div className="w-96 my-4">
             <p className="w-full text-center text-xl my-4">

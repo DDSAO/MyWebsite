@@ -1,21 +1,58 @@
 const { MongoClient } = require("mongodb");
+const sha256 = require("crypto-js/sha256");
 
 const client = new MongoClient("mongodb://localhost:27017");
 
-const UserCollection = client.db("IFindJob").collection("UserCollection");
+const UserCollection = client.db("FrontierUnited").collection("User");
 
 const init = async () => {
   await UserCollection.updateOne(
-    { id: 0 },
+    { username: "system" },
     {
       $set: {
-        username: "test",
-        password:
-          "7b3d979ca8330a94fa7e9e1b466d8b99e0bcdea1ec90596c0dcc8d7ef6b4300c",
+        password: JSON.stringify(
+          sha256(JSON.stringify(sha256("Fu601").words)).words
+        ),
+        groups: [
+          "review",
+          "ap",
+          "ar",
+          "setting",
+          "profit",
+          "AUD",
+          "USD",
+          "JPY",
+          "OTHER",
+        ],
+        region: "AU",
       },
     },
     { upsert: true }
   );
+  await UserCollection.updateOne(
+    { username: "jpsystem" },
+    {
+      $set: {
+        password: JSON.stringify(
+          sha256(JSON.stringify(sha256("Fujp3508").words)).words
+        ),
+        groups: [
+          "review",
+          "ap",
+          "ar",
+          "setting",
+          "profit",
+          "AUD",
+          "USD",
+          "JPY",
+          "OTHER",
+        ],
+        region: "JP",
+      },
+    },
+    { upsert: true }
+  );
+
   console.log("ok");
   process.exit(1);
 };

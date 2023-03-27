@@ -11,6 +11,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        light: "rgb(222, 234, 243)",
+        regular: "rgb(124, 172, 205)",
+        dark: "rgb(86, 147, 189)",
+      },
       fontFamily: {
         sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
       },

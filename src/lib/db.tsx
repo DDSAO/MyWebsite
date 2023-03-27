@@ -1,14 +1,26 @@
+import { Company } from "@/interfaces/customerDefinition";
+import { PortCode } from "@/interfaces/portCodeDefinition";
+import { Tariff } from "@/interfaces/tariffDefinitions";
 import { User } from "@/interfaces/userDefinitions";
 import { MongoClient } from "mongodb";
 
 export const client = new MongoClient("mongodb://localhost:27017");
 
 export const UserCollection = client
-  .db("IFindJob")
-  .collection<User>("UserCollection");
+  .db("FrontierUnited")
+  .collection<User>("User");
+export const CompanyCollection = client
+  .db("FrontierUnited")
+  .collection<Company>("Company");
+export const PortCodeCollection = client
+  .db("FrontierUnited")
+  .collection<PortCode>("PortCode");
+export const TariffCollection = client
+  .db("FrontierUnited")
+  .collection<Tariff>("Tariff");
 
 export const IndexCollection = client
-  .db("IFindJob")
+  .db("FrontierUnited")
   .collection("IndexCollection");
 
 export const verifyToken = async (
