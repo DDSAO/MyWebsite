@@ -50,7 +50,7 @@ function usePost<G = unknown, T = unknown>(args: {
   const fetchReducer = (state: State<G, T>, action: Action<T>): State<G, T> => {
     switch (action.type) {
       case "loading":
-        return { ...initialState, loading: true };
+        return { ...state, loading: true };
       case "fetched":
         return {
           ...initialState,

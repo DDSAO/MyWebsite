@@ -18,7 +18,7 @@ const NavBar = () => {
 export const PageWithNav = (props: { children?: any; user: User }) => {
   let { user, children } = props;
   const router = useRouter();
-  console.log(router.pathname.split("/").join(" "));
+  // console.log(router.pathname.split("/").join(" "));
   return (
     <div className="">
       <div className="h-16 flex items-center justify-between px-2">
@@ -59,7 +59,7 @@ export const PageWithNav = (props: { children?: any; user: User }) => {
         <div className="rounded-[32px] bg-regular h-full w-full py-[32px]">
           <div
             onClick={() => {
-              router.push("/consol/list/");
+              router.push("/admin/consol/list/");
             }}
             className="cursor-pointer select-text duration-300 h-24 group hover:bg-light flex flex-col items-center justify-center gap-2"
           >
@@ -71,7 +71,7 @@ export const PageWithNav = (props: { children?: any; user: User }) => {
 
           <div
             onClick={() => {
-              router.push("/accounting/list/");
+              router.push("/admin/accounting/list/");
             }}
             className="cursor-pointer select-text duration-300 h-24 group hover:bg-light flex flex-col items-center justify-center gap-2"
           >
@@ -83,7 +83,7 @@ export const PageWithNav = (props: { children?: any; user: User }) => {
 
           <div
             onClick={() => {
-              router.push("/setting/");
+              router.push("/admin/setting/");
             }}
             className="cursor-pointer select-text duration-300 h-24 group hover:bg-light flex flex-col items-center justify-center gap-2"
           >

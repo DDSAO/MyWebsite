@@ -127,8 +127,8 @@ export type Consol = {
   MBL: string;
   EDN: string;
 
-  carrier: CompanyWithFixedContact;
-  coloader: CompanyWithFixedContact;
+  carrier: CompanyWithFixedContact | null;
+  coloader: CompanyWithFixedContact | null;
   paymentType: string;
   carrierBkgRef: string;
 
@@ -136,9 +136,9 @@ export type Consol = {
   availableDate: number;
   storageDate: number;
 
-  exportAgent: CompanyWithFixedContact;
-  importAgent: CompanyWithFixedContact;
-  warehouse: CompanyWithFixedContact;
+  exportAgent: CompanyWithFixedContact | null;
+  importAgent: CompanyWithFixedContact | null;
+  warehouse: CompanyWithFixedContact | null;
 
   routings: [Route];
   cost: [Invoice];
@@ -272,7 +272,7 @@ export type ConsolFilters = {
 };
 
 export const EMPTY_CONSOL_FILTERS: ConsolFilters = {
-  onlyToday: true,
+  onlyToday: false,
   page_no: 1,
   page_num: 20,
 };

@@ -1,3 +1,4 @@
+import { Consol } from "@/interfaces/consolDefinitions";
 import { Company } from "@/interfaces/customerDefinition";
 import { PortCode } from "@/interfaces/portCodeDefinition";
 import { Tariff } from "@/interfaces/tariffDefinitions";
@@ -5,6 +6,10 @@ import { User } from "@/interfaces/userDefinitions";
 import { MongoClient } from "mongodb";
 
 export const client = new MongoClient("mongodb://localhost:27017");
+
+export const ConsolCollection = client
+  .db("FrontierUnited")
+  .collection<Consol>("Consol");
 
 export const UserCollection = client
   .db("FrontierUnited")
