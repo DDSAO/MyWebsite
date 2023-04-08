@@ -10,12 +10,21 @@ export const SelectField = (props: {
   value: string[] | string;
   onChangeF: (value: string | null) => void;
   options: string[];
+  displayOption?: (option: string) => any;
   notAllowNull?: boolean;
   multiple?: boolean;
   disabled?: boolean;
 }) => {
-  const { title, value, onChangeF, options, multiple, notAllowNull, disabled } =
-    props;
+  const {
+    title,
+    value,
+    onChangeF,
+    options,
+    multiple,
+    notAllowNull,
+    disabled,
+    displayOption,
+  } = props;
   const [open, setOpen] = useState(false);
   const theRef = useRef(null);
 
@@ -41,15 +50,19 @@ export const SelectField = (props: {
         onClick={() => {
           if (!disabled) setOpen(!open);
         }}
-        className="flex flex-col overflow-hidden"
+        className="flex flex-col"
       >
         {title ? (
-          <p className="text-left text-xs text-slate-500">{title}</p>
+          <p className="text-left text-xs text-slate-500 whitespace-nowrap">
+            {title}
+          </p>
         ) : null}
 
         <div
-          className={`bg-white flex items-center justify-flex rounded-md border h-8 w-full hover:border-2 overflow-hidden ${
-            open ? "border-slate-500 border-2" : "border-slate-300"
+          className={`bg-white flex items-center justify-flex rounded-md h-7 w-full overflow-hidden ${
+            open
+              ? "ring-offset-0 ring-2 ring-green-400 border-transparent"
+              : "ring-offset-0 ring-1 ring-slate-300 hover:ring-2"
           }`}
         >
           <p
@@ -57,7 +70,7 @@ export const SelectField = (props: {
               disabled ? "text-slate-500" : ""
             }`}
           >
-            {typeof value === "string" ? value : value.join(",")}
+            {value ? (typeof value === "string" ? value : value.join(",")) : ""}
           </p>
           {disabled && (
             <AiOutlineLock
@@ -137,7 +150,7 @@ export const SelectField = (props: {
                     : ""
                 } duration-200 transition`}
               >
-                {option}
+                {displayOption ? displayOption(option) : option}
               </li>
             );
           })}
