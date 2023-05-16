@@ -64,7 +64,7 @@ export const ConfirmButtonDanger = (props: {
       className={`relative w-40 h-8`}
     >
       <div
-        className={`cursor-pointer rounded-md leading-7 border border-yellow-400 hover:border-yellow-600 hover:bg-yellow-50 block absolute w-40 h-8 px-2 ${
+        className={`cursor-pointer rounded-md leading-8 border border-yellow-400 hover:border-yellow-600 hover:bg-yellow-50 block absolute w-40 h-8 px-2 ${
           open
             ? "animate-[flip-front-down_0.5s_ease-in-out_forwards]"
             : "animate-[flip-front-up_0.5s_ease-in-out_forwards]"
@@ -77,7 +77,7 @@ export const ConfirmButtonDanger = (props: {
         </p>
       </div>
       <div
-        className={`cursor-pointer rounded-md leading-7 border bg-red-500 hover:bg-red-600 border-red-800 block absolute w-40 h-8 px-2 ${
+        className={`cursor-pointer rounded-md leading-8 border bg-red-500 hover:bg-red-600 border-red-800 block absolute w-40 h-8 px-2 ${
           open
             ? "animate-[flip-back-down_0.5s_ease-in-out_forwards]"
             : "animate-[flip-back-up_0.5s_ease-in-out_forwards]"

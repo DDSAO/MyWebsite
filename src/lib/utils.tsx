@@ -91,10 +91,6 @@ export const timestampToCountUp = (ts: number) => {
   return `${days} days - ${[hours, minutes, seconds].map(format).join(":")}`;
 };
 
-export const aboveDiamond = (group: string) => {
-  return ["Diamond", "Black"].includes(group);
-};
-
 export const toOneDecimals = (num: number) => +(Math.round(num * 10) + "e-1");
 export const toTwoDecimals = (num: number) => +(Math.round(num * 100) + "e-2");
 export const toFourDecimals = (num: number) =>
@@ -208,7 +204,7 @@ export const openNewTab = (url: string, absolutePath?: boolean) => {
     );
   } else {
     return window.open(
-      `https://czpofficeapp.com${url}`,
+      `PRODUCTION_WEB_HOST${url}`,
       "_blank",
       "noopener,noreferrer"
     );

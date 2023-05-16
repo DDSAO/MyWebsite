@@ -67,7 +67,7 @@ export const ButtonWithIcon = (props: {
       className={`flex flex-start h-8`}
     >
       <div
-        className={`flex flex-start items-center h-8 cursor-pointer rounded-md leading-7 border border-blue-300 hover:border-blue-500 hover:bg-blue-50 hover:animate-[slide-bg-right-blue_1s_ease-in_forwards] overflow-hidden `}
+        className={`flex flex-start items-center h-8 cursor-pointer rounded-md leading-8 border border-blue-300 hover:border-blue-500 hover:bg-blue-50 hover:animate-[slide-bg-right-blue_1s_ease-in_forwards] overflow-hidden `}
       >
         {startIcon ? (
           <div className="w-8 h-8 flex justify-center items-center text-lg">

@@ -2,7 +2,7 @@ import { Company } from "@/interfaces/customerDefinition";
 import usePost from "@/lib/hooks/usePost";
 import { debounce } from "lodash";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { AiOutlineLoading } from "react-icons/ai";
+import { AiOutlineLoading, AiOutlineLock } from "react-icons/ai";
 import { BsQuestion } from "react-icons/bs";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import {
@@ -13,19 +13,20 @@ import {
 import { TiTimes } from "react-icons/ti";
 
 export const CompanyField = (props: {
-  onChangeF: (priceSource: Company | null) => void;
+  onChangeF: (company: Company | null) => void;
   value: Company | null;
   title?: string;
   disableEdit?: boolean;
+  type?: string;
 }) => {
-  const { title, value, onChangeF, disableEdit } = props;
+  const { title, value, onChangeF, disableEdit, type } = props;
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<Company[]>([]);
   const [inputValue, setInputValue] = useState("");
   const theRef = useRef(null);
 
   const searchOptionsQuery = usePost<
-    { searchKey: string },
+    { searchKey: string; type: string | undefined },
     { options: Company[] }
   >({
     url: "/company/search",
@@ -41,6 +42,7 @@ export const CompanyField = (props: {
       debounce((value) => {
         searchOptionsQuery.reload({
           searchKey: value,
+          type,
         });
       }, 500),
     []
@@ -70,27 +72,29 @@ export const CompanyField = (props: {
   }, [theRef]);
 
   return (
-    <div ref={theRef} className="relative min-w-[80px] w-full">
+    <div ref={theRef} className="relative min-w-[80px] w-full ">
       <div
         onClick={() => {
-          if (!disableEdit) setOpen(!open);
+          if (!disableEdit && !open) setOpen(!open);
         }}
         className="flex flex-col"
       >
         {title ? (
-          <p className="text-left text-xs text-slate-500">{title}</p>
+          <p className="text-left text-xs text-slate-500 whitespace-nowrap">
+            {title}
+          </p>
         ) : null}
 
         <div
-          className={`bg-white flex items-center justify-flex rounded-md ring-1 h-7 w-full hover:ring-2 overflow-hidden ${
+          className={`bg-transparent flex items-center justify-flex rounded-md ring-1 h-8 w-full hover:ring-2  ${
             open ? "ring-slate-500" : "ring-slate-300"
           }`}
         >
           {open ? (
-            <div className="absolute left-0 w-full h-7">
+            <div className="absolute left-0 w-full h-8">
               <input
                 autoFocus
-                className="absolute text-left left-2 ml-1 h-7 overflow-hidden w-[calc(100%-2.5em)] border-none outline-none focus:ring-0"
+                className="absolute text-left left-0 ml-1 h-8  leading-8 overflow-hidden w-[calc(100%-2.5em)] border-none outline-none focus:ring-0"
                 value={inputValue}
                 onChange={(e) => {
                   setInputValue(e.target.value);
@@ -99,8 +103,12 @@ export const CompanyField = (props: {
               />
             </div>
           ) : (
-            <div className="absolute left-0 w-full h-7">
-              <p className="absolute text-left left-3 leading-7 whitespace-nowrap overflow-hidden w-[calc(100%-4em)] border-none outline-none focus:ring-0">
+            <div className="absolute left-0 w-full h-8">
+              <p
+                className={`${
+                  disableEdit ? "text-slate-500" : ""
+                } absolute text-left left-1 leading-8 whitespace-nowrap overflow-hidden w-[calc(100%-4em)] border-none outline-none focus:ring-0`}
+              >
                 {value && value.id ? value.id : "NOT SELECTED"}
               </p>
             </div>
@@ -112,6 +120,8 @@ export const CompanyField = (props: {
                 className="absolute right-2 mr-1 text-slate-400 hover:bg-slate-300"
                 size="1.25em"
               />
+            ) : disableEdit ? (
+              <AiOutlineLock className="absolute rounded-2xl right-2 mr-1 text-slate-400" />
             ) : value && value.id ? (
               <TiTimes
                 onClick={(e) => {
@@ -166,7 +176,7 @@ export const CompanyField = (props: {
                     setInputValue(option.id ? option.id : "");
                     setOpen(false);
                   }}
-                  className={`flex flex-col items-start justify-start text-md text-left m-1 p-2 rounded-md hover:bg-slate-300 ${
+                  className={`cursor-pointer flex flex-col items-start justify-start text-md text-left m-1 p-2 rounded-md hover:bg-slate-300 ${
                     value && option.id === value.id ? "bg-slate-200" : ""
                   } overflow-hidden`}
                 >

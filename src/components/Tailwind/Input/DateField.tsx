@@ -13,14 +13,20 @@ export const DateField = (props: {
 }) => {
   const { title, onChangeF, value, disableEdit } = props;
   return (
-    <div className="flex flex-col justify-center items-start w-full">
+    <div className="flex flex-col justify-start items-start w-full">
       {title ? (
-        <p className="text-left text-xs text-slate-500">{title}</p>
+        <p className="text-left text-xs text-slate-500 whitespace-nowrap">
+          {title}
+        </p>
       ) : null}
       <input
         className={`${
-          value ? "" : "text-slate-500"
-        } h-7 ring-offset-0 ring-1 ring-slate-300 p-1 hover:ring-2 focus:outline-none duration-200 transition-shadow rounded-md w-full `}
+          disableEdit
+            ? "pointer-events-none text-slate-500"
+            : value
+            ? ""
+            : "text-slate-500"
+        }  h-8 ring-offset-0 ring-1 ring-slate-300 p-1 hover:ring-2 focus:outline-none duration-200 transition-shadow rounded-md w-full `}
         type="date"
         value={value ? timestampToStr(value) : ""}
         onChange={(e) => {

@@ -21,6 +21,7 @@ export const TextField = (props: {
   textColor?: string;
 
   focusInput?: number | null;
+  align?: string;
 }) => {
   let {
     title,
@@ -37,6 +38,7 @@ export const TextField = (props: {
     bg,
     textColor,
     focusInput,
+    align,
   } = props;
 
   const [inputValue, setInputValue] = useState(value);
@@ -70,12 +72,14 @@ export const TextField = (props: {
 
   return (
     <div
-      className={`flex flex-col justify-center items-start w-full ${
+      className={`flex flex-col justify-start items-start w-full ${
         bg ?? "bg-transparent"
       }`}
     >
       {title ? (
-        <p className="text-left text-xs text-slate-500">{title}</p>
+        <p className="text-left text-xs text-slate-500  whitespace-nowrap">
+          {title}
+        </p>
       ) : null}
       <div className="relative w-full">
         <input
@@ -85,7 +89,9 @@ export const TextField = (props: {
             if (autoSelect) e.target.select();
           }}
           disabled={disableEdit}
-          className={`h-7 ${
+          className={`${disableEdit ? "text-slate-500" : ""} h-8 ${
+            align === "right" ? "text-right" : "text-left"
+          } ${
             inputValue !== value
               ? "ring-offset-0 ring-2 ring-green-400 border-transparent"
               : "ring-offset-0 ring-1 ring-slate-300 "
@@ -114,7 +120,11 @@ export const TextField = (props: {
         />
 
         {disableEdit && (
-          <div className="absolute right-0 top-1 text-slate-400">
+          <div
+            className={`absolute ${
+              align === "right" ? "left-0" : "right-0"
+            }  top-1 text-slate-400`}
+          >
             <SmallIconButton icon={<AiOutlineLock />} />
           </div>
         )}

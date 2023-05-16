@@ -46,11 +46,6 @@ export const BasicTable = (props: {
 
   const theRef = useRef(null);
 
-  // let totalNum = useMemo(() => {
-  //   if (totalNum) return totalNum;
-  //   return rows.length;
-  // }, [rows.length, totalNum]);
-
   useEffect(() => {
     if (requireClearSelect) {
       setSelected(null);
@@ -68,6 +63,7 @@ export const BasicTable = (props: {
     };
 
     document.addEventListener("mousedown", handleClick);
+    setTimeout(() => {}, 100);
     return () => document.removeEventListener("mousedown", handleClick);
   }, [remainSelectedOnLeave]);
 
@@ -80,39 +76,6 @@ export const BasicTable = (props: {
   useEffect(() => {
     if (onPageChangeF) onPageChangeF(pageNo, pageNum);
   }, [pageNo, pageNum]);
-
-  // if (loading)
-  //   return (
-  //     <div className="w-full flex flex-col items-center justify-center">
-  //       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
-  //         <div className="flex items-center justify-start animate-pulse">
-  //           {buttons}
-  //         </div>
-  //         <div className="flex justify-center items-center">
-  //           <nav
-  //             className="isolate inline-flex rounded-md shadow-sm"
-  //             aria-label="Pagination"
-  //           >
-  //             <a className="w-8 h-8  animate-pulse bg-slate-300 cursor-pointer inline-flex items-center rounded-md border border-gray-300 px-2 py-2 mx-1 text-sm font-medium text-slate-500 focus:z-20">
-  //               <MdOutlineKeyboardArrowLeft />
-  //             </a>
-
-  //             <a className="text-center w-8 h-8 animate-pulse   bg-slate-300 cursor-pointer inline-flex items-center rounded-md border border-gray-300 px-2 py-2 mx-1 text-sm font-medium text-slate-500 focus:z-20">
-  //               ...
-  //             </a>
-  //             <a className="w-8 h-8  animate-pulse  bg-slate-300 cursor-pointer inline-flex items-center rounded-md border border-gray-300 px-2 py-2 mx-1 text-sm font-medium text-slate-500 focus:z-20">
-  //               <MdOutlineKeyboardArrowRight />
-  //             </a>
-  //           </nav>
-  //         </div>
-  //         <div className="flex justify-end items-center">
-  //           <div className="w-32 h-8 bg-slate-300 animate-pulse"></div>
-  //         </div>
-  //       </div>
-
-  //       <div className="w-full h-96 m-2 bg-slate-300 animate-pulse"></div>
-  //     </div>
-  //   );
 
   return (
     <div

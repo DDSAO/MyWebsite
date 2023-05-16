@@ -74,7 +74,7 @@ export const ConfirmButtonPrimary = (props: {
       className={`relative h-8`}
     >
       <div
-        className={`cursor-pointer rounded-md leading-7 border bg-blue-50 border-blue-300 hover:border-blue-500 hover:bg-blue-100 block absolute w-40 h-8 px-2 ${
+        className={`cursor-pointer rounded-md leading-8 border bg-blue-50 border-blue-300 hover:border-blue-500 hover:bg-blue-100 block absolute w-40 h-8 px-2 ${
           open
             ? "animate-[flip-front-down_0.5s_ease-in-out_forwards]"
             : "animate-[flip-front-up_0.5s_ease-in-out_forwards]"
@@ -87,7 +87,7 @@ export const ConfirmButtonPrimary = (props: {
         </p>
       </div>
       <div
-        className={`cursor-pointer rounded-md leading-7 border bg-green-500 hover:bg-green-600 border-green-800  block absolute w-40 h-8 px-2 ${
+        className={`cursor-pointer rounded-md leading-8 border bg-green-500 hover:bg-green-600 border-green-800  block absolute w-40 h-8 px-2 ${
           open
             ? "animate-[flip-back-down_0.5s_ease-in-out_forwards]"
             : "animate-[flip-back-up_0.5s_ease-in-out_forwards]"

@@ -43,7 +43,7 @@ export const SlideButton = (props: {
             textColor: "text-blue-500",
             selectedTextColor: "text-white",
             borderColor:
-              "border-blue-300 hover:border-blue-500 hover:bg-blue-50",
+              "border-blue-300 hover:border-blue-500 bg-white hover:bg-blue-50",
             selectedColor:
               "border-blue-500 hover:border-blue-700 bg-blue-500 hover:bg-blue-700",
           };
@@ -58,7 +58,7 @@ export const SlideButton = (props: {
             selectedTextColor: "text-white",
 
             borderColor:
-              "border-yellow-300 hover:border-yellow-500 hover:bg-yellow-50",
+              "border-yellow-300 hover:border-yellow-500 bg-white hover:bg-yellow-50",
             selectedColor:
               "border-yellow-500 hover:border-yellow-500 bg-yellow-500 hover:bg-yellow-700",
           };
@@ -68,7 +68,7 @@ export const SlideButton = (props: {
             selectedTextColor: "text-white",
 
             borderColor:
-              "border-green-500 hover:border-green-700 hover:bg-green-50",
+              "border-green-500 hover:border-green-700 bg-white hover:bg-green-50",
             selectedColor:
               "border-green-500 hover:border-green-700 bg-green-500 hover:bg-green-700",
           };
@@ -78,16 +78,27 @@ export const SlideButton = (props: {
             selectedTextColor: "text-white",
 
             borderColor:
-              "border-pink-300 hover:border-pink-500 hover:bg-pink-50",
+              "border-pink-300 hover:border-pink-500  bg-white hover:bg-pink-50",
             selectedColor:
               "border-pink-500 hover:border-pink-500 bg-pink-500 hover:bg-pink-700",
+          };
+
+        case "red":
+          return {
+            textColor: "text-red-500",
+            selectedTextColor: "text-white",
+
+            borderColor:
+              "border-red-300 hover:border-red-500 bg-white hover:bg-red-50",
+            selectedColor:
+              "border-red-500 hover:border-red-500 bg-red-500 hover:bg-red-700",
           };
         default:
           return {
             textColor: "text-blue-500",
             selectedTextColor: "text-white",
             borderColor:
-              "border-blue-300 hover:border-blue-500 hover:bg-blue-50",
+              "border-blue-300 hover:border-blue-500 bg-white hover:bg-blue-50",
             selectedColor:
               "border-blue-500 hover:border-blue-500 bg-blue-500 hover:bg-blue-700",
           };
@@ -120,7 +131,7 @@ export const SlideButton = (props: {
   }, []);
 
   return (
-    <div className={`flex h-8 ${loading ? "animate-pulse" : ""}`}>
+    <div className={`flex h-8 ${loading ? "animate-pulse" : ""} select-none`}>
       <div
         onClick={() => {
           !loading && !disabled && onClickF();
@@ -137,7 +148,7 @@ export const SlideButton = (props: {
         // style={{
         //   width: width ? width : (lowerRef.current as any)?.clientWidth,
         // }}
-        className={`relative flex flex-col flex-start items-center h-8 cursor-pointer rounded-md leading-7 border ${
+        className={`relative flex flex-col flex-start items-center h-8 cursor-pointer rounded-md leading-8 border ${
           loading || disabled
             ? "bg-slate-200"
             : selected

@@ -55,7 +55,9 @@ export const GroupSelectField = (props: {
         className="flex flex-col overflow-hidden"
       >
         {title ? (
-          <p className="text-left text-xs text-slate-500">{title}</p>
+          <p className="text-left text-xs text-slate-500 whitespace-nowrap">
+            {title}
+          </p>
         ) : null}
 
         <div

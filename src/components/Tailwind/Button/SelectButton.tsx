@@ -15,7 +15,7 @@ export type ButtonSelection = {
 
 export const SelectButton = (props: {
   title?: string;
-  options?: ButtonSelection[];
+  options?: (ButtonSelection | null)[];
   loading?: boolean;
   expandDirection?: "bottomLeft" | "bottomRight" | undefined;
 }) => {
@@ -45,7 +45,7 @@ export const SelectButton = (props: {
     );
 
   return (
-    <div ref={theRef} className="relative">
+    <div ref={theRef} className="relative select-none">
       <p className="h-0 px-7 invisible">{title}</p>
       <div
         onClick={() => {
@@ -54,7 +54,7 @@ export const SelectButton = (props: {
         className="flex flex-col overflow-hidden"
       >
         <div
-          className={`cursor-pointer group rounded-md border border-blue-300 hover:border-blue-500 h-8 flex items-center justify-start ${
+          className={`cursor-pointer group rounded-md border bg-white border-blue-300 hover:border-blue-500 h-8 flex items-center justify-start ${
             open ? "bg-blue-50" : ""
           }`}
         >
@@ -96,8 +96,44 @@ export const SelectButton = (props: {
           }`}
         >
           <ul className="rounded-md">
-            {options.map((option, i) => {
-              if (option.disabled) {
+            {options
+              .filter((option): option is ButtonSelection => option !== null)
+              .map((option, i) => {
+                if (option.disabled) {
+                  return (
+                    <li
+                      key={i}
+                      onClick={() => {
+                        if (!option.disabled) {
+                          option.onClickF();
+                          setOpen(false);
+                        }
+                      }}
+                      className={`relative cursor-not-allowed text-md text-left m-1 p-2 rounded-md flex items-center `}
+                    >
+                      <p
+                        className={`invisible ${
+                          option.icon ? "px-6" : "px-4"
+                        } h-8 w-fit block whitespace-nowrap`}
+                      >
+                        {option.title}
+                      </p>
+                      <div className="absolute left-0 top-2 w-8 h-8 flex items-center justify-center text-slate-400">
+                        {option.icon ? (
+                          option.icon
+                        ) : (
+                          <MdOutlineKeyboardArrowRight />
+                        )}
+                      </div>
+
+                      <p
+                        className={`absolute left-8 block whitespace-nowrap text-slate-400`}
+                      >
+                        {option.title}
+                      </p>
+                    </li>
+                  );
+                }
                 return (
                   <li
                     key={i}
@@ -107,7 +143,7 @@ export const SelectButton = (props: {
                         setOpen(false);
                       }
                     }}
-                    className={`relative cursor-not-allowed text-md text-left m-1 p-2 rounded-md flex items-center `}
+                    className={`relative cursor-pointer text-md text-left m-1 p-2 rounded-md flex items-center hover:bg-blue-200 duration-300 `}
                   >
                     <p
                       className={`invisible ${
@@ -116,7 +152,7 @@ export const SelectButton = (props: {
                     >
                       {option.title}
                     </p>
-                    <div className="absolute left-0 top-2 w-8 h-8 flex items-center justify-center text-slate-400">
+                    <div className="absolute left-0 top-2 w-8 h-8 flex items-center justify-center">
                       {option.icon ? (
                         option.icon
                       ) : (
@@ -124,46 +160,12 @@ export const SelectButton = (props: {
                       )}
                     </div>
 
-                    <p
-                      className={`absolute left-8 block whitespace-nowrap text-slate-400`}
-                    >
+                    <p className={`absolute left-8 block whitespace-nowrap`}>
                       {option.title}
                     </p>
                   </li>
                 );
-              }
-              return (
-                <li
-                  key={i}
-                  onClick={() => {
-                    if (!option.disabled) {
-                      option.onClickF();
-                      setOpen(false);
-                    }
-                  }}
-                  className={`relative cursor-pointer text-md text-left m-1 p-2 rounded-md flex items-center hover:bg-blue-200 duration-300 `}
-                >
-                  <p
-                    className={`invisible ${
-                      option.icon ? "px-6" : "px-4"
-                    } h-8 w-fit block whitespace-nowrap`}
-                  >
-                    {option.title}
-                  </p>
-                  <div className="absolute left-0 top-2 w-8 h-8 flex items-center justify-center">
-                    {option.icon ? (
-                      option.icon
-                    ) : (
-                      <MdOutlineKeyboardArrowRight />
-                    )}
-                  </div>
-
-                  <p className={`absolute left-8 block whitespace-nowrap`}>
-                    {option.title}
-                  </p>
-                </li>
-              );
-            })}
+              })}
           </ul>
         </div>
       ) : null}

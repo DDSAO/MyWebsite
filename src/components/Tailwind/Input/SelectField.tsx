@@ -59,14 +59,14 @@ export const SelectField = (props: {
         ) : null}
 
         <div
-          className={`bg-white flex items-center justify-flex rounded-md h-7 w-full overflow-hidden ${
+          className={`bg-transparent flex items-center justify-flex rounded-md h-8 w-full overflow-hidden ${
             open
               ? "ring-offset-0 ring-2 ring-green-400 border-transparent"
               : "ring-offset-0 ring-1 ring-slate-300 hover:ring-2"
           }`}
         >
           <p
-            className={`absolute text-left left-2 ml-1 whitespace-nowrap overflow-hidden w-[calc(100%-2.5em)] ${
+            className={`absolute text-left left-1 ml-1 whitespace-nowrap overflow-hidden w-[calc(100%-2.5em)] ${
               disabled ? "text-slate-500" : ""
             }`}
           >

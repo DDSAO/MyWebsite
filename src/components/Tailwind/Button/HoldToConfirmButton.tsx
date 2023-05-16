@@ -9,8 +9,19 @@ export const HoldToConfirmButton = (props: {
   disabled?: boolean;
   color?: string;
   onClickF?: () => void;
+  startIcon?: any;
+  endIcon?: any;
 }) => {
-  const { loading, front, back, disabled, onClickF, color } = props;
+  const {
+    loading,
+    front,
+    back,
+    disabled,
+    onClickF,
+    color,
+    startIcon,
+    endIcon,
+  } = props;
 
   const [open, setOpen] = useState(false);
   const [lock, setLock] = useState(true);
@@ -86,85 +97,83 @@ export const HoldToConfirmButton = (props: {
       document.removeEventListener("mousedown", handleClick);
       if (confirmTimeline.current) (confirmTimeline.current as any).kill();
     };
-  }, [loading, disabled]);
+  }, [loading, disabled, front, back]);
 
   let { textColor, selectedTextColor, borderColor, selectedColor } =
     useMemo(() => {
-      if (!disabled) {
-        switch (color) {
-          case "blue":
-            return {
-              textColor: "text-blue-500",
-              selectedTextColor: "text-white",
-              borderColor:
-                "border-blue-300 hover:border-blue-500 hover:bg-blue-50",
-              selectedColor:
-                "border-blue-500 hover:border-blue-700 bg-blue-500 hover:bg-blue-700",
-            };
-          case "white":
-            return {
-              textColor: "text-white",
-              borderColor: "border-slate-50 hover:border-white ",
-            };
-          case "yellow":
-            return {
-              textColor: "text-yellow-700",
-              selectedTextColor: "text-white",
-
-              borderColor:
-                "border-yellow-400 hover:border-yellow-600 hover:bg-yellow-50",
-              selectedColor:
-                "border-yellow-400 hover:border-yellow-400 bg-yellow-600 hover:bg-yellow-700",
-            };
-          case "red":
-            return {
-              textColor: "text-red-500",
-              selectedTextColor: "text-white",
-
-              borderColor:
-                "border-red-300 hover:border-red-500 hover:bg-red-50",
-              selectedColor:
-                "border-red-500 hover:border-red-500 bg-red-500 hover:bg-red-700",
-            };
-          case "green":
-            return {
-              textColor: "text-green-500",
-              selectedTextColor: "text-white",
-
-              borderColor:
-                "border-green-500 hover:border-green-700 hover:bg-green-50",
-              selectedColor:
-                "border-green-500 hover:border-green-700 bg-green-500 hover:bg-green-700",
-            };
-          case "pink":
-            return {
-              textColor: "text-pink-500",
-              selectedTextColor: "text-white",
-
-              borderColor:
-                "border-pink-300 hover:border-pink-500 hover:bg-pink-50",
-              selectedColor:
-                "border-pink-500 hover:border-pink-500 bg-pink-500 hover:bg-pink-700",
-            };
-          default:
-            return {
-              textColor: "text-blue-500",
-              selectedTextColor: "text-white",
-              borderColor:
-                "border-blue-300 hover:border-blue-500 hover:bg-blue-50",
-              selectedColor:
-                "border-blue-500 hover:border-blue-500 bg-blue-500 hover:bg-blue-700",
-            };
-        }
-      } else {
+      if (disabled)
         return {
-          textColor: "text-slate-500",
+          textColor: "text-slate-400",
           selectedTextColor: "text-white",
-          borderColor:
-            "border-slate-300 hover:border-slate-500 hover:bg-slate-50",
-          selectedColor:
-            "border-slate-500 hover:border-slate-700 bg-slate-500 hover:bg-slate-700",
+          borderColor: "bg-slate-200",
+          selectedColor: "bg-slate-200",
         };
+
+      switch (color) {
+        case "blue":
+          return {
+            textColor: "text-blue-500",
+            selectedTextColor: "text-white",
+            borderColor:
+              "border-blue-300 hover:border-blue-500 bg-white hover:bg-blue-50",
+            selectedColor:
+              "border-blue-500 hover:border-blue-700 bg-blue-500 hover:bg-blue-700",
+          };
+        case "white":
+          return {
+            textColor: "text-white",
+            borderColor: "border-slate-50 hover:border-white ",
+          };
+        case "yellow":
+          return {
+            textColor: "text-yellow-500",
+            selectedTextColor: "text-white",
+
+            borderColor:
+              "border-yellow-300 hover:border-yellow-500 bg-white hover:bg-yellow-50",
+            selectedColor:
+              "border-yellow-500 hover:border-yellow-500 bg-yellow-500 hover:bg-yellow-700",
+          };
+        case "green":
+          return {
+            textColor: "text-green-500",
+            selectedTextColor: "text-white",
+
+            borderColor:
+              "border-green-500 hover:border-green-700 bg-white hover:bg-green-50",
+            selectedColor:
+              "border-green-500 hover:border-green-700 bg-green-500 hover:bg-green-700",
+          };
+        case "pink":
+          return {
+            textColor: "text-pink-500",
+            selectedTextColor: "text-white",
+
+            borderColor:
+              "border-pink-300 hover:border-pink-500  bg-white hover:bg-pink-50",
+            selectedColor:
+              "border-pink-500 hover:border-pink-500 bg-pink-500 hover:bg-pink-700",
+          };
+
+        case "red":
+          return {
+            textColor: "text-red-500",
+            selectedTextColor: "text-white",
+
+            borderColor:
+              "border-red-300 hover:border-red-500 bg-white hover:bg-red-50",
+            selectedColor:
+              "border-red-500 hover:border-red-500 bg-red-500 hover:bg-red-700",
+          };
+        default:
+          return {
+            textColor: "text-blue-500",
+            selectedTextColor: "text-white",
+            borderColor:
+              "border-blue-300 hover:border-blue-500 bg-white hover:bg-blue-50",
+            selectedColor:
+              "border-blue-500 hover:border-blue-500 bg-blue-500 hover:bg-blue-700",
+          };
       }
     }, [color, disabled]);
 
@@ -197,7 +206,7 @@ export const HoldToConfirmButton = (props: {
           <p className="px-4 whitespace-nowrap">{back}</p>
         </div>
         {loading && (
-          <div className={` h-7 flex justify-center items-center w-full`}>
+          <div className={` h-8 flex justify-center items-center w-full`}>
             <AiOutlineLoading className="animate-spin text-slate-500" />
           </div>
         )}
@@ -218,7 +227,7 @@ export const HoldToConfirmButton = (props: {
       }}
       className={`${
         disabled ? "pointer-events-none cursor-not-allowed" : ""
-      } relative cursor-pointer h-8 border ${borderColor} rounded-md overflow-hidden`}
+      } relative cursor-pointer select-none h-8 border ${borderColor} rounded-md overflow-hidden`}
     >
       {/* Default text  */}
       <p

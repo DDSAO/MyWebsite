@@ -41,16 +41,19 @@ export const TextArea = (props: {
   }, [value]);
 
   return (
-    <div className="flex flex-col justify-center items-start w-full">
+    <div className="flex flex-col justify-start items-start w-full">
       {title ? (
         <div className="flex flex-start">
-          <p className="text-left text-sm">{title}</p>
+          <p className="text-left text-xs text-slate-500  whitespace-nowrap">
+            {title}
+          </p>
         </div>
       ) : null}
 
       <textarea
+        disabled={disableEdit}
         rows={rows ? rows : 1}
-        className={` ${
+        className={`${disableEdit ? "text-slate-500" : ""} ${
           inputValue !== value
             ? "ring-offset-0 ring-2 ring-green-400 border-transparent"
             : "ring-offset-0 ring-1 ring-slate-300 "
