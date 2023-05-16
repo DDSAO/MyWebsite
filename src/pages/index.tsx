@@ -1,14 +1,8 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { GetServerSideProps } from "next";
-import { User } from "@/interfaces/userDefinitions";
-import { getCookie } from "cookies-next";
-import { verifyToken } from "@/lib/db";
-
 // interface PageProps {
 //   user: User;
 // }
+
+import { CandleVideo } from "@/components/app/home/CandleVideo";
 
 // export const getServerSideProps: GetServerSideProps<PageProps> = async ({
 //   req,
@@ -33,5 +27,11 @@ import { verifyToken } from "@/lib/db";
 // };
 
 export default function Home() {
-  return <div>Hi</div>;
+  return (
+    <div>
+      <div className=" relative w-screen h-screen bg-black">
+        <CandleVideo />
+      </div>
+    </div>
+  );
 }
